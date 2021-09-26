@@ -1,4 +1,4 @@
-﻿namespace LAB02
+﻿namespace LAB02_01
 {
     partial class Calculator
     {

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1DED9020-FA30-4129-9EC6-A5B3FD08869B}</ProjectGuid>
+    <ProjectGuid>{74AC9556-E6AF-43E2-B633-C0FCC42CFD37}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>LAB02</RootNamespace>
-    <AssemblyName>LAB02</AssemblyName>
+    <RootNamespace>LAB02_01</RootNamespace>
+    <AssemblyName>LAB02_01</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,9 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
-    </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
