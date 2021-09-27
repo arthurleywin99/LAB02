@@ -54,11 +54,29 @@ namespace LAB02_02
                 {
                     index = dgvStudentList.Rows.Add();
                     Update(index);
+                    if (optMale.Checked)
+                    {
+                        txtSumMale.Text = (int.Parse(txtSumMale.Text) + 1).ToString();
+                    }
+                    else
+                    {
+                        txtSumFemale.Text = (int.Parse(txtSumFemale.Text) + 1).ToString();
+                    }
                     MessageBox.Show("Thêm thành công", "Success", MessageBoxButtons.OK);
                 }
                 else
                 {
                     Update(index);
+                    if (optMale.Checked)
+                    {
+                        txtSumMale.Text = (int.Parse(txtSumMale.Text) + 1).ToString();
+                        txtSumFemale.Text = (int.Parse(txtSumFemale.Text) - 1).ToString();
+                    }
+                    else
+                    {
+                        txtSumMale.Text = (int.Parse(txtSumMale.Text) - 1).ToString();
+                        txtSumFemale.Text = (int.Parse(txtSumFemale.Text) + 1).ToString();
+                    }
                     MessageBox.Show("Cập nhật thành công", "Success", MessageBoxButtons.OK);
                 }
             }
@@ -125,15 +143,6 @@ namespace LAB02_02
             dgvStudentList.Rows[index].Cells[2].Value = optMale.Checked ? "Nam" : "Nữ";
             dgvStudentList.Rows[index].Cells[3].Value = txtAverageScore.Text;
             dgvStudentList.Rows[index].Cells[4].Value = cmbFaculty.Text;
-
-            if (optMale.Checked)
-            {
-                txtSumMale.Text = (int.Parse(txtSumMale.Text) + 1).ToString();
-            }
-            else
-            {
-                txtSumFemale.Text = (int.Parse(txtSumFemale.Text) + 1).ToString();
-            }
         }
 
         private void dgvStudentList_CellClick(object sender, DataGridViewCellEventArgs e)
