@@ -89,6 +89,12 @@ namespace LAB02_01
                 txtA.Focus();
                 errorProvider.SetError(txtA, "Sai định dạng số");                
             }
+            else if (txtA.Text.Length > 9)
+            {
+                e.Cancel = true;
+                txtA.Focus();
+                errorProvider.SetError(txtA, "Dữ liệu phải nhỏ hơn 10 chữ số");
+            }
             else
             {
                 e.Cancel = false;
@@ -111,6 +117,12 @@ namespace LAB02_01
                 e.Cancel = true;
                 txtB.Focus();
                 errorProvider.SetError(txtB, "Sai định dạng số");
+            }
+            else if (txtB.Text.Length > 9)
+            {
+                e.Cancel = true;
+                txtB.Focus();
+                errorProvider.SetError(txtB, "Dữ liệu phải nhỏ hơn 10 chữ số");
             }
             else
             {
