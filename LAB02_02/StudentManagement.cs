@@ -141,7 +141,7 @@ namespace LAB02_02
             dgvStudentList.Rows[index].Cells[0].Value = txtStudentID.Text;
             dgvStudentList.Rows[index].Cells[1].Value = txtFullName.Text;
             dgvStudentList.Rows[index].Cells[2].Value = optMale.Checked ? "Nam" : "Nữ";
-            dgvStudentList.Rows[index].Cells[3].Value = txtAverageScore.Text;
+            dgvStudentList.Rows[index].Cells[3].Value = float.Parse(txtAverageScore.Text);
             dgvStudentList.Rows[index].Cells[4].Value = cmbFaculty.Text;
         }
 
@@ -169,11 +169,83 @@ namespace LAB02_02
                         break;
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK);
+            }
+        }
+
+        private void txtStudentID_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtStudentID.Text))
+            {
+                e.Cancel = true;
+                txtStudentID.Focus();
+                errorProvider.SetError(txtStudentID, "Không được để trống");
+            }
+            else if (txtStudentID.Text.Any(ch => !Char.IsLetterOrDigit(ch)))
+            {
+                e.Cancel = true;
+                txtStudentID.Focus();
+                errorProvider.SetError(txtStudentID, "Mã sinh viên không chứa ký tự đặc biệt");
+            }
+            else if (txtStudentID.Text.Length != 10)
+            {
+                e.Cancel = true;
+                txtStudentID.Focus();
+                errorProvider.SetError(txtStudentID, "Mã sinh viên là một chuỗi 10 ký tự");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider.SetError(txtStudentID, null);
+            }
+        }
+
+        private void txtFullName_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtFullName.Text))
+            {
+                e.Cancel = true;
+                txtFullName.Focus();
+                errorProvider.SetError(txtFullName, "Không được để trống");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider.SetError(txtFullName, null);
+            }
+        }
+
+        private void txtAverageScore_Validating(object sender, CancelEventArgs e)
+        {
+            float number;
+            bool check;
+            check = float.TryParse(txtAverageScore.Text, out number);
+            if (string.IsNullOrWhiteSpace(txtAverageScore.Text))
+            {
+                e.Cancel = true;
+                txtAverageScore.Focus();
+                errorProvider.SetError(txtAverageScore, "Không được để trống");
+            }
+            else if (!check)
+            {
+                e.Cancel = true;
+                txtAverageScore.Focus();
+                errorProvider.SetError(txtAverageScore, "Phải nhập dữ liệu là số thực");
+            }
+            else if (number < 0 || number > 10)
+            {
+                e.Cancel = true;
+                txtAverageScore.Focus();
+                errorProvider.SetError(txtAverageScore, "Điểm phải nằm trong khoảng từ 0 - 10");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider.SetError(txtAverageScore, null);
             }
         }
     }

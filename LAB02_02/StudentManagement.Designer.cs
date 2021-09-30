@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -70,6 +71,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtSumFemale = new System.Windows.Forms.TextBox();
             this.txtSumMale = new System.Windows.Forms.TextBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudentList)).BeginInit();
@@ -89,6 +91,7 @@
             this.tableLayoutPanel11.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -281,6 +284,7 @@
             this.txtAverageScore.Name = "txtAverageScore";
             this.txtAverageScore.Size = new System.Drawing.Size(246, 32);
             this.txtAverageScore.TabIndex = 17;
+            this.txtAverageScore.Validating += new System.ComponentModel.CancelEventHandler(this.txtAverageScore_Validating);
             // 
             // tableLayoutPanel15
             // 
@@ -308,6 +312,7 @@
             this.txtFullName.Name = "txtFullName";
             this.txtFullName.Size = new System.Drawing.Size(246, 32);
             this.txtFullName.TabIndex = 17;
+            this.txtFullName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFullName_Validating);
             // 
             // tableLayoutPanel4
             // 
@@ -530,6 +535,7 @@
             this.txtStudentID.Name = "txtStudentID";
             this.txtStudentID.Size = new System.Drawing.Size(246, 32);
             this.txtStudentID.TabIndex = 17;
+            this.txtStudentID.Validating += new System.ComponentModel.CancelEventHandler(this.txtStudentID_Validating);
             // 
             // tableLayoutPanel10
             // 
@@ -684,6 +690,10 @@
             this.txtSumMale.TabIndex = 2;
             this.txtSumMale.Text = "0";
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // StudentManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -724,6 +734,7 @@
             this.tableLayoutPanel12.ResumeLayout(false);
             this.tableLayoutPanel13.ResumeLayout(false);
             this.tableLayoutPanel13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -772,6 +783,7 @@
         private System.Windows.Forms.TextBox txtAverageScore;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
         private System.Windows.Forms.TextBox txtFullName;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
 
