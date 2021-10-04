@@ -31,11 +31,10 @@ namespace LAB02_04
             foreach (var item in accounts)
             {
                 DataGridViewRow row = (DataGridViewRow)dgvAccount.Rows[0].Clone();
-                row.Cells[0].Value = 0;
-                row.Cells[1].Value = item.AccountID;
-                row.Cells[2].Value = item.FullName;
-                row.Cells[3].Value = item.Address;
-                row.Cells[4].Value = item.Total;
+                row.Cells[0].Value = item.AccountID;
+                row.Cells[1].Value = item.FullName;
+                row.Cells[2].Value = item.Address;
+                row.Cells[3].Value = item.Total;
                 dgvAccount.Rows.Add(row);
             }
         }
@@ -48,11 +47,10 @@ namespace LAB02_04
                 Account account = new Account() { AccountID = txtAccountID.Text, FullName = txtFullName.Text, Address = txtAddress.Text, Total = Convert.ToInt32(txtTotal.Text) };
                 AccountController.AddAccount(account);
                 DataGridViewRow row = (DataGridViewRow)dgvAccount.Rows[0].Clone();
-                row.Cells[0].Value = 0;
-                row.Cells[1].Value = account.AccountID;
-                row.Cells[2].Value = account.FullName;
-                row.Cells[3].Value = account.Address;
-                row.Cells[4].Value = account.Total;
+                row.Cells[0].Value = account.AccountID;
+                row.Cells[1].Value = account.FullName;
+                row.Cells[2].Value = account.Address;
+                row.Cells[3].Value = account.Total;
                 dgvAccount.Rows.Add(row);
             }
             else
@@ -80,24 +78,31 @@ namespace LAB02_04
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int index = GetSelectedStudent(txtAccountID.Text);
-            if (index == -1)
+            try
             {
-                return;
-            }
-            else
-            {
-                Account account = new Account() { AccountID = txtAccountID.Text, FullName = txtFullName.Text, Address = txtAddress.Text, Total = Convert.ToInt32(txtTotal.Text) };
-                DialogResult dialog = MessageBox.Show("Bạn có muốn xóa tài khoản này không?", "Warning", MessageBoxButtons.YesNo);
-                if (dialog == DialogResult.Yes)
+                int index = GetSelectedStudent(txtAccountID.Text);
+                if (index == -1)
                 {
-                    AccountController.DeleteAccount(account);
-                    LoadAccount();
+                    throw new Exception("Mã tài khoản không hợp lệ");
                 }
                 else
                 {
-                    return;
+                    Account account = new Account() { AccountID = txtAccountID.Text, FullName = txtFullName.Text, Address = txtAddress.Text, Total = Convert.ToInt32(txtTotal.Text) };
+                    DialogResult dialog = MessageBox.Show("Bạn có muốn xóa tài khoản này không?", "Warning", MessageBoxButtons.YesNo);
+                    if (dialog == DialogResult.Yes)
+                    {
+                        AccountController.DeleteAccount(account);
+                        LoadAccount();
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -109,10 +114,10 @@ namespace LAB02_04
         private void dgvAccount_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
-            txtAccountID.Text = dgvAccount.Rows[rowIndex].Cells[1].Value.ToString();
-            txtFullName.Text = dgvAccount.Rows[rowIndex].Cells[2].Value.ToString();
-            txtAddress.Text = dgvAccount.Rows[rowIndex].Cells[3].Value.ToString();
-            txtTotal.Text = dgvAccount.Rows[rowIndex].Cells[4].Value.ToString();
+            txtAccountID.Text = dgvAccount.Rows[rowIndex].Cells[0].Value.ToString();
+            txtFullName.Text = dgvAccount.Rows[rowIndex].Cells[1].Value.ToString();
+            txtAddress.Text = dgvAccount.Rows[rowIndex].Cells[2].Value.ToString();
+            txtTotal.Text = dgvAccount.Rows[rowIndex].Cells[3].Value.ToString();
         }
     }
 }

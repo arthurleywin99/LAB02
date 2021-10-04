@@ -52,15 +52,14 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.dgvAccount = new System.Windows.Forms.DataGridView();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAccountID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
+            this.colAccountID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
@@ -426,7 +425,6 @@
             this.dgvAccount.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAccount.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colID,
             this.colAccountID,
             this.colFullName,
             this.colAddress,
@@ -437,31 +435,6 @@
             this.dgvAccount.Size = new System.Drawing.Size(1233, 289);
             this.dgvAccount.TabIndex = 2;
             this.dgvAccount.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccount_CellClick);
-            // 
-            // colID
-            // 
-            this.colID.HeaderText = "STT";
-            this.colID.Name = "colID";
-            // 
-            // colAccountID
-            // 
-            this.colAccountID.HeaderText = "Mã Tài Khoản";
-            this.colAccountID.Name = "colAccountID";
-            // 
-            // colFullName
-            // 
-            this.colFullName.HeaderText = "Tên Khách Hàng";
-            this.colFullName.Name = "colFullName";
-            // 
-            // colAddress
-            // 
-            this.colAddress.HeaderText = "Địa Chỉ";
-            this.colAddress.Name = "colAddress";
-            // 
-            // colTotal
-            // 
-            this.colTotal.HeaderText = "Số Tiền";
-            this.colTotal.Name = "colTotal";
             // 
             // tableLayoutPanel12
             // 
@@ -518,6 +491,26 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(213, 24);
             this.textBox5.TabIndex = 1;
+            // 
+            // colAccountID
+            // 
+            this.colAccountID.HeaderText = "Mã Tài Khoản";
+            this.colAccountID.Name = "colAccountID";
+            // 
+            // colFullName
+            // 
+            this.colFullName.HeaderText = "Tên Khách Hàng";
+            this.colFullName.Name = "colFullName";
+            // 
+            // colAddress
+            // 
+            this.colAddress.HeaderText = "Địa Chỉ";
+            this.colAddress.Name = "colAddress";
+            // 
+            // colTotal
+            // 
+            this.colTotal.HeaderText = "Số Tiền";
+            this.colTotal.Name = "colTotal";
             // 
             // AccountManagement
             // 
@@ -582,15 +575,14 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.DataGridView dgvAccount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAccountID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAccountID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
     }
 }
 
