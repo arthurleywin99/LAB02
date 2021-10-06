@@ -114,20 +114,35 @@ namespace LAB02_03
 
         private void AddDataToDB()
         {
-            UpdateBillController.AddBill(new Bill() { BillID = dgvBill.RowCount, PurchaseDate = Convert.ToDateTime(dtpPurchaseDate.Value.ToShortDateString().ToString()), Total = Convert.ToDecimal(txtTotal.Text) });
-
-            for (int i = 0; i < buttons.GetLength(0); ++i)
+            string error = string.Empty;
+            if (UpdateBillController.AddBill(new Bill() { BillID = dgvBill.RowCount, PurchaseDate = Convert.ToDateTime(dtpPurchaseDate.Value.ToShortDateString().ToString()), Total = Convert.ToDecimal(txtTotal.Text) }, out error))
             {
-                for (int j = 0; j < buttons.GetLength(1); ++j)
+                MessageBox.Show("Thêm hóa đơn thành công", "Success", MessageBoxButtons.OK);
+
+                for (int i = 0; i < buttons.GetLength(0); ++i)
                 {
-                    if (buttons[i, j].BackColor == Color.Blue)
+                    for (int j = 0; j < buttons.GetLength(1); ++j)
                     {
-                        UpdateBillController.AddBillDetails(new BillDetail { BillID = dgvBill.RowCount, SeatID = 5 * i + j + 1 });
-                        buttons[i, j].BackColor = Color.Yellow;
+                        if (buttons[i, j].BackColor == Color.Blue && Convert.ToDouble(txtTotal.Text) != 0)
+                        {
+                            error = string.Empty;
+                            if (UpdateBillController.AddBillDetails(new BillDetail { BillID = dgvBill.RowCount, SeatID = 5 * i + j + 1 }, out error)) 
+                            {
+                                buttons[i, j].BackColor = Color.Yellow;
+                            }
+                            else
+                            {
+                                MessageBox.Show($"Thêm thất bại. Mã lỗi: {error}", "Error", MessageBoxButtons.OK);
+                            }
+                        }
                     }
                 }
+                LoadBill();
             }
-            LoadBill();
+            else
+            {
+                MessageBox.Show("Thêm thất bại", "Error", MessageBoxButtons.OK);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -157,7 +172,7 @@ namespace LAB02_03
 
             dtpPurchaseDate.Value = Convert.ToDateTime(dgvBill.Rows[rowIndex].Cells[2].Value.ToString());
 
-            txtTotal.Text = dgvBill.Rows[rowIndex].Cells[3].Value.ToString();
+            txtTotal.Text = dgvBill.Rows[rowIndex].Cells[4].Value.ToString();
         }
     }
 }

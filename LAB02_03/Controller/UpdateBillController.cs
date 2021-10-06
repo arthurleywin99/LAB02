@@ -9,21 +9,41 @@ namespace LAB02_03.Controller
 {
     internal class UpdateBillController
     {
-        public static void AddBill(Bill bill)
+        public static bool AddBill(Bill bill, out string error)
         {
             using (var context = new TSContext())
             {
-                context.Bills.Add(bill);
-                context.SaveChanges();
+                error = string.Empty;
+                try
+                {
+                    context.Bills.Add(bill);
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    error = ex.Message;
+                    return false;
+                }
             }
         }
 
-        public static void AddBillDetails(BillDetail billDetail)
+        public static bool AddBillDetails(BillDetail billDetail, out string error)
         {
             using (var context = new TSContext())
             {
-                context.BillDetails.Add(billDetail);
-                context.SaveChanges();
+                error = string.Empty;
+                try
+                {
+                    context.BillDetails.Add(billDetail);
+                    context.SaveChanges();
+                    return true;    
+                }
+                catch (Exception ex)
+                {
+                    error = ex.Message;
+                    return false;
+                }
             }
         }
     }
