@@ -47,10 +47,6 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvBill = new System.Windows.Forms.DataGridView();
-            this.colBillID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSeatCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvBillDetails = new System.Windows.Forms.DataGridView();
             this.colBillID_Details = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDate_Details = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +55,11 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBillID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSeatCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -360,6 +361,7 @@
             this.dgvBill.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBill.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colID,
             this.colBillID,
             this.colDate,
             this.colSeatCount,
@@ -371,26 +373,6 @@
             this.dgvBill.Size = new System.Drawing.Size(540, 362);
             this.dgvBill.TabIndex = 5;
             this.dgvBill.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBill_CellClick);
-            // 
-            // colBillID
-            // 
-            this.colBillID.HeaderText = "Mã Hóa Đơn";
-            this.colBillID.Name = "colBillID";
-            // 
-            // colDate
-            // 
-            this.colDate.HeaderText = "Ngày Mua";
-            this.colDate.Name = "colDate";
-            // 
-            // colSeatCount
-            // 
-            this.colSeatCount.HeaderText = "Số Ghế";
-            this.colSeatCount.Name = "colSeatCount";
-            // 
-            // colTotal
-            // 
-            this.colTotal.HeaderText = "Tổng Tiền";
-            this.colTotal.Name = "colTotal";
             // 
             // dgvBillDetails
             // 
@@ -467,6 +449,31 @@
             this.label3.Text = "HÓA ĐƠN";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // colID
+            // 
+            this.colID.HeaderText = "STT";
+            this.colID.Name = "colID";
+            // 
+            // colBillID
+            // 
+            this.colBillID.HeaderText = "Mã Hóa Đơn";
+            this.colBillID.Name = "colBillID";
+            // 
+            // colDate
+            // 
+            this.colDate.HeaderText = "Ngày Mua";
+            this.colDate.Name = "colDate";
+            // 
+            // colSeatCount
+            // 
+            this.colSeatCount.HeaderText = "Số Ghế";
+            this.colSeatCount.Name = "colSeatCount";
+            // 
+            // colTotal
+            // 
+            this.colTotal.HeaderText = "Tổng Tiền";
+            this.colTotal.Name = "colTotal";
+            // 
             // Cinema
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -523,14 +530,15 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBillID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSeatCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBillID_Details;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDate_Details;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSeatID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBillID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSeatCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
     }
 }
 

@@ -57,10 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\BillController.cs" />
-    <Compile Include="Controller\BillDetailsController.cs" />
+    <Compile Include="Controller\UpdateBillController.cs" />
     <Compile Include="Controller\GetBillController.cs" />
-    <Compile Include="Controller\GetBillDetailsController.cs" />
     <Compile Include="Cinema.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -48,7 +48,7 @@ namespace LAB02_03
         {
             dgvBill.Rows.Clear();
             var result = GetBillController.GetBill();
-            var ordered = GetBillDetailsController.OrderedSeat();
+            var ordered = GetBillController.OrderedSeat();
             foreach (var item in ordered)
             {
                 var index = Convert.ToInt32(item.SeatID);
@@ -65,13 +65,14 @@ namespace LAB02_03
                     buttons[2, index - 11].BackColor = Color.Yellow;
                 }
             }
-            foreach (var item in result)
+            for (int i = 0; i < result.Count; ++i)
             {
                 DataGridViewRow row = (DataGridViewRow)dgvBill.Rows[0].Clone();
-                row.Cells[0].Value = item.BillID.ToString();
-                row.Cells[1].Value = item.PurchaseDate.Value.ToShortDateString();
-                row.Cells[2].Value = GetBillDetailsController.GetBillDetails(item.BillID).Count;
-                row.Cells[3].Value = item.Total.Value.ToString();
+                row.Cells[0].Value = i + 1;
+                row.Cells[1].Value = result[i].BillID.ToString();
+                row.Cells[2].Value = result[i].PurchaseDate.Value.ToShortDateString();
+                row.Cells[3].Value = GetBillController.GetBillDetails(result[i].BillID).Count;
+                row.Cells[4].Value = result[i].Total.Value.ToString();
                 dgvBill.Rows.Add(row);
             }
         }
@@ -102,7 +103,7 @@ namespace LAB02_03
                 {
                     if (buttons[i, j].BackColor == Color.Blue)
                     {
-                        total += GetBillDetailsController.GetPrice(5 * i + j + 1);
+                        total += GetBillController.GetPrice(5 * i + j + 1);
                     }
                 }
             }
@@ -113,7 +114,7 @@ namespace LAB02_03
 
         private void AddDataToDB()
         {
-            BillController.AddBill(new Bill() { BillID = dgvBill.RowCount, PurchaseDate = Convert.ToDateTime(dtpPurchaseDate.Value.ToShortDateString().ToString()), Total = Convert.ToDecimal(txtTotal.Text) });
+            UpdateBillController.AddBill(new Bill() { BillID = dgvBill.RowCount, PurchaseDate = Convert.ToDateTime(dtpPurchaseDate.Value.ToShortDateString().ToString()), Total = Convert.ToDecimal(txtTotal.Text) });
 
             for (int i = 0; i < buttons.GetLength(0); ++i)
             {
@@ -121,7 +122,7 @@ namespace LAB02_03
                 {
                     if (buttons[i, j].BackColor == Color.Blue)
                     {
-                        BillDetailsController.AddBillDetails(new BillDetail { BillID = dgvBill.RowCount, SeatID = 5 * i + j + 1 });
+                        UpdateBillController.AddBillDetails(new BillDetail { BillID = dgvBill.RowCount, SeatID = 5 * i + j + 1 });
                         buttons[i, j].BackColor = Color.Yellow;
                     }
                 }
@@ -143,18 +144,18 @@ namespace LAB02_03
         {
             dgvBillDetails.Rows.Clear();
             int rowIndex = e.RowIndex;
-            var result = GetBillDetailsController.GetBillDetails(int.Parse(dgvBill.Rows[rowIndex].Cells[0].Value.ToString()));
+            var result = GetBillController.GetBillDetails(int.Parse(dgvBill.Rows[rowIndex].Cells[0].Value.ToString()));
             foreach (var item in result)
             {
                 DataGridViewRow row = (DataGridViewRow)dgvBillDetails.Rows[0].Clone();
-                row.Cells[0].Value = int.Parse(dgvBill.Rows[rowIndex].Cells[0].Value.ToString());
+                row.Cells[0].Value = int.Parse(dgvBill.Rows[rowIndex].Cells[1].Value.ToString());
                 row.Cells[1].Value = dgvBill.Rows[rowIndex].Cells[1].Value;
                 row.Cells[2].Value = item.SeatID.ToString();
-                row.Cells[3].Value = GetBillDetailsController.GetPrice(Convert.ToInt32(item.SeatID));
+                row.Cells[3].Value = GetBillController.GetPrice(Convert.ToInt32(item.SeatID));
                 dgvBillDetails.Rows.Add(row); 
             }
 
-            dtpPurchaseDate.Value = Convert.ToDateTime(dgvBill.Rows[rowIndex].Cells[1].Value.ToString());
+            dtpPurchaseDate.Value = Convert.ToDateTime(dgvBill.Rows[rowIndex].Cells[2].Value.ToString());
 
             txtTotal.Text = dgvBill.Rows[rowIndex].Cells[3].Value.ToString();
         }
