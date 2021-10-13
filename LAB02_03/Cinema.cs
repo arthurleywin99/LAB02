@@ -5,21 +5,32 @@ using System.Windows.Forms;
 using LAB02_03.Model;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Data;
 
 namespace LAB02_03
 {
     public partial class Cinema : Form
     {
+        private DataTable data;
         private Button[,] buttons;
         public Cinema()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
+            data = new DataTable();
+            data.Columns.Add("STT", typeof(int));
+            data.Columns.Add("Mã Hóa Đơn", typeof(string));
+            data.Columns.Add("Ngày Mua", typeof(DateTime));
+            data.Columns.Add("Số Ghế", typeof(int));
+            data.Columns.Add("Tổng Tiền", typeof(int));
+            dgvBill.DataSource = data;
         }
 
         private void Cinema_Load(object sender, EventArgs e)
         {
             CreateButton(3, 5);
             LoadBill();
+            LoadCustomer();
         }
 
         private void CreateButton(int height, int width)
@@ -46,7 +57,6 @@ namespace LAB02_03
 
         private void LoadBill()
         {
-            dgvBill.Rows.Clear();
             var result = GetBillController.GetBill();
             var ordered = GetBillController.OrderedSeat();
             foreach (var item in ordered)
@@ -67,13 +77,27 @@ namespace LAB02_03
             }
             for (int i = 0; i < result.Count; ++i)
             {
-                DataGridViewRow row = (DataGridViewRow)dgvBill.Rows[0].Clone();
-                row.Cells[0].Value = i + 1;
-                row.Cells[1].Value = result[i].BillID.ToString();
-                row.Cells[2].Value = result[i].PurchaseDate.Value.ToShortDateString();
-                row.Cells[3].Value = GetBillController.GetBillDetails(result[i].BillID).Count;
-                row.Cells[4].Value = result[i].Total.Value.ToString();
-                dgvBill.Rows.Add(row);
+                AddRow(i, result[i]);
+            }
+        }
+
+        private void AddRow(int index, Bill bill)
+        {
+            DataRow row = data.NewRow();
+            row["STT"] = index + 1;
+            row["Mã Hóa Đơn"] = bill.BillID.ToString();
+            row["Ngày Mua"] = bill.PurchaseDate.Value.ToShortDateString();
+            row["Số Ghế"] = GetBillController.GetBillDetails(bill.BillID).Count;
+            row["Tổng Tiền"] = bill.Total.Value.ToString();
+            data.Rows.Add(row);
+        }
+
+        private void LoadCustomer()
+        {
+            List<Customer> customers = GetCustomerController.GetCustomer();
+            foreach (var item in customers)
+            {
+                cboCustomer.Items.Add(item.CustomerName);
             }
         }
 
@@ -157,22 +181,39 @@ namespace LAB02_03
 
         private void dgvBill_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dgvBillDetails.Rows.Clear();
+            if (dgvBill.CurrentCell.RowIndex == dgvBill.Rows.Count - 1)
+            {
+                return;
+            }
             int rowIndex = e.RowIndex;
             var result = GetBillController.GetBillDetails(int.Parse(dgvBill.Rows[rowIndex].Cells[0].Value.ToString()));
+            
+            DataTable details = new DataTable();
+            details.Columns.Add("Mã Hóa Đơn", typeof(string));
+            details.Columns.Add("Ngày Mua", typeof(DateTime));
+            details.Columns.Add("Mã Ghế", typeof(int));
+            details.Columns.Add("Giá Tiền", typeof(int));
+            dgvBillDetails.DataSource = details;
+
             foreach (var item in result)
             {
-                DataGridViewRow row = (DataGridViewRow)dgvBillDetails.Rows[0].Clone();
-                row.Cells[0].Value = int.Parse(dgvBill.Rows[rowIndex].Cells[1].Value.ToString());
-                row.Cells[1].Value = dgvBill.Rows[rowIndex].Cells[1].Value;
-                row.Cells[2].Value = item.SeatID.ToString();
-                row.Cells[3].Value = GetBillController.GetPrice(Convert.ToInt32(item.SeatID));
-                dgvBillDetails.Rows.Add(row); 
+                DataRow row = details.NewRow();
+                row["Mã Hóa Đơn"] = item.BillID.ToString();
+                row["Ngày Mua"] = dgvBill.Rows[dgvBill.CurrentCell.RowIndex].Cells[2].Value.ToString();
+                row["Mã Ghế"] = item.SeatID;
+                row["Giá Tiền"] = GetBillController.GetPrice(item.SeatID.Value);
+                details.Rows.Add(row);
             }
 
             dtpPurchaseDate.Value = Convert.ToDateTime(dgvBill.Rows[rowIndex].Cells[2].Value.ToString());
 
             txtTotal.Text = dgvBill.Rows[rowIndex].Cells[4].Value.ToString();
+        }
+
+        private void btnAddCustomer_Click(object sender, EventArgs e)
+        {
+            frmCustomer Form = new frmCustomer();
+            Form.ShowDialog();
         }
     }
 }

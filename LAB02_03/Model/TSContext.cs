@@ -8,12 +8,13 @@ namespace LAB02_03.Model
     public partial class TSContext : DbContext
     {
         public TSContext()
-            : base("name=TSContext1")
+            : base("name=TSContext")
         {
         }
 
         public virtual DbSet<Bill> Bills { get; set; }
         public virtual DbSet<BillDetail> BillDetails { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<RowSeat> RowSeats { get; set; }
         public virtual DbSet<Seat> Seats { get; set; }
 
@@ -22,6 +23,11 @@ namespace LAB02_03.Model
             modelBuilder.Entity<Bill>()
                 .Property(e => e.Total)
                 .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(e => e.Bills)
+                .WithOptional(e => e.Customer)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<RowSeat>()
                 .Property(e => e.Price)

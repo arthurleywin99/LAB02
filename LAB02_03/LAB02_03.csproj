@@ -57,6 +57,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\UpdateCustomerController.cs" />
+    <Compile Include="Customer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer.Designer.cs">
+      <DependentUpon>Customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controller\GetCustomerController.cs" />
     <Compile Include="Controller\UpdateBillController.cs" />
     <Compile Include="Controller\GetBillController.cs" />
     <Compile Include="Cinema.cs">
@@ -67,11 +75,15 @@
     </Compile>
     <Compile Include="Model\Bill.cs" />
     <Compile Include="Model\BillDetail.cs" />
+    <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\RowSeat.cs" />
     <Compile Include="Model\Seat.cs" />
     <Compile Include="Model\TSContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Customer.resx">
+      <DependentUpon>Customer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Cinema.resx">
       <DependentUpon>Cinema.cs</DependentUpon>
     </EmbeddedResource>
